@@ -1,0 +1,17 @@
+
+
+{%block content%}
+{% import "macro.html" as macros%}
+<h1>Alumnos</h1>
+<form action="" method="post">
+{{macros.render_field(form.X1,class="form-controls")}}
+{{macros.render_field(form.Y1)}}
+{{macros.render_field(form.X2)}}
+{{macros.render_field(form.Y2)}}
+
+<input type="submit" name="btn1" value="calcular">
+</form>
+
+<h1>La distancia es : {{R}}</h1>
+
+{%endblock%}
