@@ -1,0 +1,107 @@
+{%extends "layout.html" %}
+
+{% block content %}
+{% import "macro.html" as macros %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <style>
+        /* Estilos para la tabla y las celdas */
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-size: 18px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        
+      
+
+        .mark {
+            font-size: 16px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #dddddd;
+            background-color: var(--color);
+           
+
+        }
+        .mark2 {
+            font-size: 16px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: var(--color2);
+           
+
+        }
+        .mark3 {
+            font-size: 16px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: var(--color3);
+           
+
+        }
+        .mark4 {
+            font-size: 16px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: var(--color4);
+           
+
+        }
+
+       
+    </style>
+</head>
+<body>
+
+
+    <form action="/resistencia" method="post" style="margin: 0 auto; width: 900px;">
+        {{ macros.render_field(form.color1, class="form-controls") }}
+        {{ macros.render_field(form.color2) }}
+        {{ macros.render_field(form.color3) }}
+        {{ macros.render_field(form.tolerancia) }}
+
+        <input type="submit" name="btn1" value="calcular">
+
+        <table>
+            <tr>
+                <th>Color 1</th>
+                <th>Color 2</th>
+                <th>Color 3</th>
+                <th>Tolerancia</th>
+                <th>Valor</th>
+                <th>Valor Máximo</th>
+                <th>Valor Mínimo</th>
+            </tr>
+            <tr>
+                <td class="mark" style="--color: {{ color }}">{{ c1 }}</td>
+                <td class="mark2" style="--color2: {{ color2 }}">{{ c2 }}</td>
+                <td class="mark3" style="--color3: {{ color3 }}">{{ c3 }}</td>
+                <td class="mark4" style="--color4: {{ color4 }}">{{ t }}</td>
+                <td>{{ v }}</td>
+                <td>{{ tma }}</td>
+                <td>{{ tmi }}</td>
+
+            </tr>
+        </table>
+    </form>
+
+{% endblock %}
+</body>
+</html>
