@@ -1,7 +1,9 @@
 from flask import Flask,render_template,request
 import formularioDistancia as forms 
+import formularioDiccionario as fo
 import claseResistencia as f
 from math import sqrt
+from io import open
 
 app=Flask(__name__)
 
@@ -176,7 +178,53 @@ def nombreColor2(opcion):
         color="#FDFEFE"
     return nombre_color_seleccionado,color
 
-    
+@app.route("/diccionario",methods=["GET","POST"])
+def dic():
+    diccionario=fo.datos(request.form)
+    diccionario2=fo.datos2(request.form)
+    pE=''
+    pI=''
+    palabraB=''
+    br='f'
+    p=[]
+    opcion=''
+    r=''
+    if request.method == 'POST' :
+        if 'btn1' in request.form:
+            if diccionario.validate():
+                pE = diccionario.pEspanol.data
+                pI = diccionario.pIngles.data
+                archivo_texto = open('diccionariotxt.txt', 'a')
+                archivo_texto.write(f'{pE}={pI}\n')
+                archivo_texto.close()
+
+        elif 'btn2' in request.form:
+            if diccionario2.validate():
+               palabraB=diccionario2.palabraB.data
+               opcion=diccionario2.elecionIdioma.data
+               archivo_texto = open('diccionariotxt.txt', 'r')
+               c=archivo_texto.read()
+               lineas=c.splitlines()
+
+               for i,linea in enumerate(lineas, start=1):
+                if palabraB.upper() in linea.upper():
+                       l=linea
+                
+                       br='v'
+               
+               if br =='f':
+                   r='palabra no encontrada'
+               elif br =='v':
+                p=l.split('=')
+                if opcion == 'Ingles':
+                   r=p[1]
+                elif opcion == 'Español':
+                    r=p[0]   
+                       
+                  
+
+    return render_template("vistaDiccionario.html",form=diccionario,fo=diccionario2,r=r)
+
 #especificar el metodo que va a arrancar la aplicacion 
 if __name__=="__main__":
     app.run(debug=True) 

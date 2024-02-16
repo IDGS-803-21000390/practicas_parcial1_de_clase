@@ -1,0 +1,5 @@
+hola=hello
+bien=good
+flores=flowers
+correr=run
+amarillo=yellow
